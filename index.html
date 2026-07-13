@@ -3,179 +3,97 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Mycelium Staffing Portal</title>
+<title>Info Solutions Staffing Portal</title>
 <style>
   :root {
-    --navy: #1F4E79;
-    --navy-dark: #142F4A;
-    --blue: #2E75B6;
-    --blue-light: #D6E4F0;
-    --blue-xlight: #EBF3FB;
-    --green: #1B5E20;
-    --green-light: #E8F5E9;
-    --green-mid: #2E7D32;
-    --red: #C62828;
-    --red-light: #FFEBEE;
-    --gold: #F9A825;
-    --gold-light: #FFF8E1;
-    --orange: #E65100;
-    --grey: #F5F5F5;
-    --grey-mid: #9E9E9E;
-    --grey-dark: #424242;
-    --white: #FFFFFF;
-    --shadow: 0 2px 12px rgba(0,0,0,0.10);
-    --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
-    --radius: 10px;
-    --radius-sm: 6px;
+    --navy: #1F4E79; --navy-dark: #142F4A; --blue: #2E75B6;
+    --blue-light: #D6E4F0; --blue-xlight: #EBF3FB;
+    --green: #1B5E20; --green-light: #E8F5E9; --green-mid: #2E7D32;
+    --red: #C62828; --red-light: #FFEBEE;
+    --gold: #F9A825; --gold-light: #FFF8E1; --orange: #E65100;
+    --grey: #F5F5F5; --grey-mid: #9E9E9E; --grey-dark: #424242; --white: #FFFFFF;
+    --shadow: 0 2px 12px rgba(0,0,0,0.10); --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
+    --radius: 10px; --radius-sm: 6px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--grey); color: var(--grey-dark); min-height: 100vh; }
 
-  /* ── LOGIN PAGE ── */
-  #login-page {
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--blue) 100%);
-    display: flex; align-items: center; justify-content: center; padding: 24px;
-  }
-  .login-card {
-    background: var(--white); border-radius: 16px; padding: 48px 40px;
-    width: 100%; max-width: 420px; box-shadow: var(--shadow-lg);
-  }
+  /* LOGIN */
+  #login-page { min-height: 100vh; background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--blue) 100%); display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .login-card { background: var(--white); border-radius: 16px; padding: 48px 40px; width: 100%; max-width: 420px; box-shadow: var(--shadow-lg); }
   .login-logo { text-align: center; margin-bottom: 32px; }
-  .login-logo .logo-mark {
-    width: 56px; height: 56px; background: var(--navy); border-radius: 14px;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 28px; margin-bottom: 12px;
-  }
+  .login-logo .logo-mark { width: 56px; height: 56px; background: var(--navy); border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 12px; }
   .login-logo h1 { font-size: 22px; font-weight: 700; color: var(--navy); line-height: 1.2; }
   .login-logo p { font-size: 13px; color: var(--grey-mid); margin-top: 4px; }
   .login-label { font-size: 13px; font-weight: 600; color: var(--grey-dark); margin-bottom: 6px; display: block; }
-  .login-input {
-    width: 100%; padding: 12px 14px; border: 1.5px solid #DDD; border-radius: var(--radius-sm);
-    font-size: 14px; color: var(--grey-dark); transition: border-color 0.2s; outline: none; margin-bottom: 16px;
-  }
+  .login-input { width: 100%; padding: 12px 14px; border: 1.5px solid #DDD; border-radius: var(--radius-sm); font-size: 14px; outline: none; margin-bottom: 16px; transition: border-color 0.2s; }
   .login-input:focus { border-color: var(--blue); }
-  .login-btn {
-    width: 100%; padding: 13px; background: var(--navy); color: var(--white);
-    border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 600;
-    cursor: pointer; transition: background 0.2s; margin-top: 4px;
-  }
+  .login-btn { width: 100%; padding: 13px; background: var(--navy); color: var(--white); border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
   .login-btn:hover { background: var(--navy-dark); }
-  .login-hint {
-    margin-top: 24px; padding: 14px; background: var(--blue-xlight);
-    border-radius: var(--radius-sm); border-left: 3px solid var(--blue);
-  }
-  .login-hint p { font-size: 12px; color: var(--navy); margin-bottom: 4px; font-weight: 600; }
-  .login-hint span { font-size: 11px; color: var(--grey-dark); display: block; margin-bottom: 2px; }
+  .login-btn:disabled { background: var(--grey-mid); cursor: not-allowed; }
   .login-error { color: var(--red); font-size: 13px; margin-top: 8px; text-align: center; display: none; }
+  .login-hint { margin-top: 24px; padding: 14px; background: var(--blue-xlight); border-radius: var(--radius-sm); border-left: 3px solid var(--blue); }
+  .login-hint p { font-size: 12px; color: var(--navy); font-weight: 600; }
+  .login-hint span { font-size: 11px; color: var(--grey-dark); display: block; margin-top: 4px; }
 
-  /* ── MAIN APP ── */
+  /* APP */
   #app { display: none; }
-  .topbar {
-    background: var(--navy); color: var(--white);
-    padding: 0 28px; height: 58px; display: flex; align-items: center;
-    justify-content: space-between; position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-  }
+  .topbar { background: var(--navy); color: var(--white); padding: 0 28px; height: 58px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
   .topbar-left { display: flex; align-items: center; gap: 12px; }
-  .topbar-logo { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
+  .topbar-logo { font-size: 17px; font-weight: 700; }
   .topbar-logo span { color: var(--blue-light); }
-  .topbar-role {
-    font-size: 11px; font-weight: 600; padding: 3px 10px;
-    border-radius: 20px; background: rgba(255,255,255,0.15); color: var(--white);
-    text-transform: uppercase; letter-spacing: 0.5px;
-  }
+  .topbar-role { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; background: rgba(255,255,255,0.15); text-transform: uppercase; letter-spacing: 0.5px; }
   .topbar-right { display: flex; align-items: center; gap: 16px; }
   .topbar-user { font-size: 13px; color: var(--blue-light); }
-  .logout-btn {
-    padding: 6px 14px; background: rgba(255,255,255,0.12); color: var(--white);
-    border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-sm);
-    font-size: 12px; cursor: pointer; transition: background 0.2s;
-  }
+  .logout-btn { padding: 6px 14px; background: rgba(255,255,255,0.12); color: var(--white); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-sm); font-size: 12px; cursor: pointer; }
   .logout-btn:hover { background: rgba(255,255,255,0.22); }
 
-  /* ── NAV TABS ── */
-  .nav-tabs {
-    background: var(--white); border-bottom: 2px solid var(--blue-light);
-    padding: 0 28px; display: flex; gap: 4px;
-  }
-  .nav-tab {
-    padding: 14px 18px; font-size: 13px; font-weight: 600; color: var(--grey-mid);
-    border: none; background: none; cursor: pointer; border-bottom: 3px solid transparent;
-    transition: all 0.2s; margin-bottom: -2px;
-  }
+  /* NAV */
+  .nav-tabs { background: var(--white); border-bottom: 2px solid var(--blue-light); padding: 0 28px; display: flex; gap: 4px; }
+  .nav-tab { padding: 14px 18px; font-size: 13px; font-weight: 600; color: var(--grey-mid); border: none; background: none; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; margin-bottom: -2px; }
   .nav-tab:hover { color: var(--navy); }
   .nav-tab.active { color: var(--navy); border-bottom-color: var(--navy); }
 
-  /* ── CONTENT ── */
+  /* CONTENT */
   .content { padding: 28px; max-width: 1200px; margin: 0 auto; }
   .page { display: none; }
   .page.active { display: block; }
-
-  /* ── PAGE HEADER ── */
   .page-header { margin-bottom: 24px; }
   .page-header h2 { font-size: 22px; font-weight: 700; color: var(--navy); }
   .page-header p { font-size: 13px; color: var(--grey-mid); margin-top: 4px; }
 
-  /* ── STAT CARDS ── */
+  /* STATS */
   .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px; }
-  .stat-card {
-    background: var(--white); border-radius: var(--radius); padding: 20px;
-    box-shadow: var(--shadow); border-left: 4px solid var(--blue);
-  }
+  .stat-card { background: var(--white); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); border-left: 4px solid var(--blue); }
   .stat-card.green { border-left-color: var(--green-mid); }
   .stat-card.red { border-left-color: var(--red); }
   .stat-card.gold { border-left-color: var(--gold); }
   .stat-num { font-size: 32px; font-weight: 700; color: var(--navy); }
   .stat-label { font-size: 12px; color: var(--grey-mid); font-weight: 600; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
 
-  /* ── SEARCH / FILTER BAR ── */
+  /* FILTER */
   .filter-bar { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; align-items: center; }
-  .search-input {
-    flex: 1; min-width: 200px; padding: 10px 14px; border: 1.5px solid #DDD;
-    border-radius: var(--radius-sm); font-size: 13px; outline: none; transition: border-color 0.2s;
-  }
+  .search-input { flex: 1; min-width: 200px; padding: 10px 14px; border: 1.5px solid #DDD; border-radius: var(--radius-sm); font-size: 13px; outline: none; }
   .search-input:focus { border-color: var(--blue); }
-  .filter-select {
-    padding: 10px 14px; border: 1.5px solid #DDD; border-radius: var(--radius-sm);
-    font-size: 13px; background: var(--white); outline: none; cursor: pointer;
-  }
+  .filter-select { padding: 10px 14px; border: 1.5px solid #DDD; border-radius: var(--radius-sm); font-size: 13px; background: var(--white); outline: none; cursor: pointer; }
 
-  /* ── CONSULTANT CARDS ── */
+  /* CARDS */
   .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-  .consultant-card {
-    background: var(--white); border-radius: var(--radius); padding: 24px;
-    box-shadow: var(--shadow); transition: box-shadow 0.2s, transform 0.2s;
-    border: 1.5px solid transparent;
-  }
+  .consultant-card { background: var(--white); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); transition: box-shadow 0.2s, transform 0.2s; border: 1.5px solid transparent; }
   .consultant-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); border-color: var(--blue-light); }
-  .card-avatar {
-    width: 52px; height: 52px; border-radius: 50%; background: var(--navy);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 14px;
-  }
+  .card-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
   .card-name { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
   .card-title { font-size: 13px; color: var(--grey-mid); margin-bottom: 12px; }
   .card-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-  .skill-tag {
-    font-size: 11px; font-weight: 600; padding: 3px 8px;
-    background: var(--blue-xlight); color: var(--blue); border-radius: 20px;
-  }
-  .avail-badge {
-    display: inline-block; font-size: 11px; font-weight: 700; padding: 4px 10px;
-    border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;
-  }
+  .skill-tag { font-size: 11px; font-weight: 600; padding: 3px 8px; background: var(--blue-xlight); color: var(--blue); border-radius: 20px; }
+  .avail-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
   .avail-badge.available { background: var(--green-light); color: var(--green-mid); }
   .avail-badge.soon { background: var(--gold-light); color: var(--orange); }
   .avail-badge.unavailable { background: var(--grey); color: var(--grey-mid); }
-  .request-btn {
-    width: 100%; padding: 10px; background: var(--navy); color: var(--white);
-    border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
-    cursor: pointer; transition: background 0.2s;
-  }
+  .request-btn { width: 100%; padding: 10px; background: var(--navy); color: var(--white); border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
   .request-btn:hover { background: var(--navy-dark); }
 
-  /* ── TABLES ── */
+  /* TABLES */
   .table-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 24px; }
   .table-card-header { padding: 16px 20px; border-bottom: 1px solid var(--blue-light); display: flex; align-items: center; justify-content: space-between; }
   .table-card-header h3 { font-size: 15px; font-weight: 700; color: var(--navy); }
@@ -184,47 +102,30 @@
   td { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid #F0F0F0; }
   tr:last-child td { border-bottom: none; }
   tr:nth-child(even) td { background: var(--blue-xlight); }
-  .status-badge {
-    display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 8px;
-    border-radius: 20px; text-transform: uppercase;
-  }
+  .status-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; text-transform: uppercase; }
   .status-badge.active { background: var(--green-light); color: var(--green-mid); }
   .status-badge.pending { background: var(--gold-light); color: var(--orange); }
   .status-badge.urgent { background: var(--red-light); color: var(--red); }
   .status-badge.new { background: var(--blue-xlight); color: var(--blue); }
 
-  /* ── FORMS ── */
+  /* FORMS */
   .form-card { background: var(--white); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); max-width: 600px; }
   .form-title { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
   .form-subtitle { font-size: 13px; color: var(--grey-mid); margin-bottom: 24px; }
   .form-group { margin-bottom: 18px; }
   .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--grey-dark); margin-bottom: 6px; }
-  .form-input, .form-select, .form-textarea {
-    width: 100%; padding: 10px 14px; border: 1.5px solid #DDD;
-    border-radius: var(--radius-sm); font-size: 13px; outline: none;
-    transition: border-color 0.2s; font-family: inherit;
-  }
+  .form-input, .form-select, .form-textarea { width: 100%; padding: 10px 14px; border: 1.5px solid #DDD; border-radius: var(--radius-sm); font-size: 13px; outline: none; transition: border-color 0.2s; font-family: inherit; }
   .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--blue); }
   .form-textarea { resize: vertical; min-height: 80px; }
-  .form-btn {
-    padding: 11px 24px; background: var(--navy); color: var(--white);
-    border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600;
-    cursor: pointer; transition: background 0.2s;
-  }
+  .form-btn { padding: 11px 24px; background: var(--navy); color: var(--white); border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
   .form-btn:hover { background: var(--navy-dark); }
-  .form-success {
-    margin-top: 16px; padding: 14px; background: var(--green-light);
-    border-radius: var(--radius-sm); border-left: 3px solid var(--green-mid);
-    font-size: 13px; color: var(--green); display: none;
-  }
+  .form-btn:disabled { background: var(--grey-mid); cursor: not-allowed; }
+  .form-success { margin-top: 16px; padding: 14px; background: var(--green-light); border-radius: var(--radius-sm); border-left: 3px solid var(--green-mid); font-size: 13px; color: var(--green); display: none; }
+  .form-error-msg { margin-top: 16px; padding: 14px; background: var(--red-light); border-radius: var(--radius-sm); border-left: 3px solid var(--red); font-size: 13px; color: var(--red); display: none; }
 
-  /* ── PROFILE PAGE ── */
+  /* PROFILE */
   .profile-card { background: var(--white); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); max-width: 560px; }
-  .profile-avatar {
-    width: 72px; height: 72px; border-radius: 50%; background: var(--navy);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 16px;
-  }
+  .profile-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
   .profile-name { font-size: 22px; font-weight: 700; color: var(--navy); }
   .profile-title { font-size: 14px; color: var(--grey-mid); margin-bottom: 20px; }
   .profile-row { display: flex; gap: 8px; margin-bottom: 10px; align-items: flex-start; }
@@ -232,16 +133,10 @@
   .profile-val { font-size: 13px; color: var(--grey-dark); }
   .profile-divider { border: none; border-top: 1px solid var(--blue-light); margin: 20px 0; }
 
-  /* ── MODAL ── */
-  .modal-overlay {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 24px;
-  }
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 24px; }
   .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--white); border-radius: var(--radius); padding: 32px;
-    width: 100%; max-width: 520px; box-shadow: var(--shadow-lg);
-  }
+  .modal { background: var(--white); border-radius: var(--radius); padding: 32px; width: 100%; max-width: 520px; box-shadow: var(--shadow-lg); }
   .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
   .modal-title { font-size: 18px; font-weight: 700; color: var(--navy); }
   .modal-close { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--grey-mid); line-height: 1; }
@@ -249,13 +144,16 @@
   .modal-consultant strong { font-size: 15px; color: var(--navy); display: block; }
   .modal-consultant span { font-size: 12px; color: var(--grey-mid); }
 
-  /* ── ALERT BANNER ── */
-  .alert-banner {
-    padding: 12px 20px; border-radius: var(--radius-sm); margin-bottom: 20px;
-    font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 10px;
-  }
+  /* ALERT */
+  .alert-banner { padding: 12px 20px; border-radius: var(--radius-sm); margin-bottom: 20px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
   .alert-banner.red { background: var(--red-light); color: var(--red); border-left: 4px solid var(--red); }
   .alert-banner.gold { background: var(--gold-light); color: var(--orange); border-left: 4px solid var(--gold); }
+
+  /* LOADING */
+  .loading-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; background: var(--navy); }
+  .loading-spinner { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.2); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { color: rgba(255,255,255,0.8); font-size: 14px; }
 
   @media (max-width: 600px) {
     .content { padding: 16px; }
@@ -267,38 +165,38 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     LOGIN PAGE
-══════════════════════════════════════ -->
-<div id="login-page">
+<!-- LOADING -->
+<div id="loading-screen" class="loading-screen">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Loading portal...</div>
+</div>
+
+<!-- LOGIN -->
+<div id="login-page" style="display:none;">
   <div class="login-card">
     <div class="login-logo">
       <div class="logo-mark">🔗</div>
-      <h1>Mycelium Staffing Portal</h1>
-      <p>Info Solutions Inc. — Powered by Mycelium Software</p>
+      <h1>Info Solutions Staffing Portal</h1>
+      <p>Mycelium Software — Secure Access</p>
     </div>
     <label class="login-label">Email Address</label>
     <input class="login-input" id="login-email" type="email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')doLogin()"/>
     <label class="login-label">Password</label>
     <input class="login-input" id="login-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
-    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <button class="login-btn" id="login-btn" onclick="doLogin()">Sign In</button>
     <p class="login-error" id="login-error">Invalid email or password. Please try again.</p>
     <div class="login-hint">
-      <p>Demo Access</p>
-      <span>Admin: admin@myceli.com / admin123</span>
-      <span>Client: client@techsphere.com / client123</span>
-      <span>Consultant: consultant@info-solutions.org / consult123</span>
+      <p>Need access?</p>
+      <span>Contact HR at faiz.ishak@info-solutions.org to request a login.</span>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     MAIN APP
-══════════════════════════════════════ -->
+<!-- APP -->
 <div id="app">
   <div class="topbar">
     <div class="topbar-left">
-      <div class="topbar-logo">Mycelium <span>Staffing Portal</span></div>
+      <div class="topbar-logo">Info Solutions <span>Staffing Portal</span></div>
       <div class="topbar-role" id="role-badge"></div>
     </div>
     <div class="topbar-right">
@@ -311,40 +209,40 @@
 
   <div class="content">
 
-    <!-- ── ADMIN DASHBOARD ── -->
+    <!-- ADMIN DASHBOARD -->
     <div class="page" id="page-admin">
       <div class="page-header">
         <h2>Admin Dashboard</h2>
         <p>Full overview of all consultants, clients, engagements, and staffing requests.</p>
       </div>
       <div class="stats-row">
-        <div class="stat-card"><div class="stat-num" id="stat-consultants">8</div><div class="stat-label">Consultants Tracked</div></div>
-        <div class="stat-card green"><div class="stat-num" id="stat-active">5</div><div class="stat-label">Responses Received</div></div>
-        <div class="stat-card red"><div class="stat-num" id="stat-urgent">2</div><div class="stat-label">Urgent Cases</div></div>
-        <div class="stat-card gold"><div class="stat-num" id="stat-pending">4</div><div class="stat-label">Awaiting Response</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-consultants">—</div><div class="stat-label">Consultants Tracked</div></div>
+        <div class="stat-card green"><div class="stat-num" id="stat-active">—</div><div class="stat-label">Active H-1B</div></div>
+        <div class="stat-card red"><div class="stat-num" id="stat-urgent">—</div><div class="stat-label">Urgent Cases</div></div>
+        <div class="stat-card gold"><div class="stat-num" id="stat-requests">—</div><div class="stat-label">Open Requests</div></div>
       </div>
       <div id="admin-alerts"></div>
       <div class="table-card">
         <div class="table-card-header"><h3>H-1B Status Overview</h3></div>
         <table>
           <thead><tr><th>Name</th><th>Status</th><th>I-797 Expiry</th><th>Days Left</th><th>Attorney</th><th>Notes</th></tr></thead>
-          <tbody id="admin-h1b-table"></tbody>
+          <tbody id="admin-h1b-table"><tr><td colspan="6" style="text-align:center;color:var(--grey-mid);padding:24px;">Loading...</td></tr></tbody>
         </table>
       </div>
       <div class="table-card">
         <div class="table-card-header"><h3>Staffing Requests</h3></div>
         <table>
-          <thead><tr><th>Date</th><th>Client</th><th>Role Needed</th><th>Skills</th><th>Status</th></tr></thead>
-          <tbody id="admin-requests-table"></tbody>
+          <thead><tr><th>Date</th><th>Client</th><th>Role Needed</th><th>Skills</th><th>Consultant</th><th>Status</th></tr></thead>
+          <tbody id="admin-requests-table"><tr><td colspan="6" style="text-align:center;color:var(--grey-mid);padding:24px;">Loading...</td></tr></tbody>
         </table>
       </div>
     </div>
 
-    <!-- ── TALENT SHOWCASE ── -->
+    <!-- TALENT SHOWCASE -->
     <div class="page" id="page-talent">
       <div class="page-header">
         <h2>Available Talent</h2>
-        <p>Browse our available consultants and submit a staffing request.</p>
+        <p>Browse available consultants and submit a staffing request.</p>
       </div>
       <div class="filter-bar">
         <input class="search-input" id="talent-search" placeholder="Search by name, title, or skill..." oninput="filterConsultants()"/>
@@ -355,10 +253,10 @@
           <option value="Available in 30 days">Available in 30 Days</option>
         </select>
       </div>
-      <div class="cards-grid" id="consultant-cards"></div>
+      <div class="cards-grid" id="consultant-cards"><p style="color:var(--grey-mid);">Loading consultants...</p></div>
     </div>
 
-    <!-- ── MY REQUESTS (CLIENT) ── -->
+    <!-- MY REQUESTS (CLIENT) -->
     <div class="page" id="page-requests">
       <div class="page-header">
         <h2>My Staffing Requests</h2>
@@ -367,16 +265,16 @@
       <div class="table-card">
         <div class="table-card-header"><h3>Request History</h3></div>
         <table>
-          <thead><tr><th>Date</th><th>Role Needed</th><th>Skills Required</th><th>Consultant</th><th>Status</th></tr></thead>
-          <tbody id="client-requests-table"></tbody>
+          <thead><tr><th>Date</th><th>Role Needed</th><th>Skills</th><th>Consultant</th><th>Status</th></tr></thead>
+          <tbody id="client-requests-table"><tr><td colspan="5" style="text-align:center;color:var(--grey-mid);padding:24px;">Loading...</td></tr></tbody>
         </table>
       </div>
-      <div style="margin-top:8px">
+      <div style="margin-top:8px;">
         <button class="form-btn" onclick="showPage('page-new-request')">+ Submit New Request</button>
       </div>
     </div>
 
-    <!-- ── NEW REQUEST FORM ── -->
+    <!-- NEW REQUEST FORM -->
     <div class="page" id="page-new-request">
       <div class="page-header">
         <h2>Submit a Staffing Request</h2>
@@ -401,38 +299,35 @@
           <label class="form-label">Engagement Duration</label>
           <select class="form-select" id="req-duration">
             <option value="">Select duration</option>
-            <option>1-3 months</option>
-            <option>3-6 months</option>
-            <option>6-12 months</option>
-            <option>12+ months</option>
+            <option>1-3 months</option><option>3-6 months</option>
+            <option>6-12 months</option><option>12+ months</option>
           </select>
         </div>
         <div class="form-group">
           <label class="form-label">Work Location</label>
           <select class="form-select" id="req-location">
             <option value="">Select location</option>
-            <option>On-site</option>
-            <option>Remote</option>
-            <option>Hybrid</option>
+            <option>On-site</option><option>Remote</option><option>Hybrid</option>
           </select>
         </div>
         <div class="form-group">
           <label class="form-label">Additional Notes</label>
-          <textarea class="form-textarea" id="req-notes" placeholder="Any additional requirements or context..."></textarea>
+          <textarea class="form-textarea" id="req-notes" placeholder="Any additional requirements..."></textarea>
         </div>
-        <button class="form-btn" onclick="submitRequest()">Submit Request</button>
-        <div class="form-success" id="req-success">✅ Your request has been submitted successfully. Our HR team will follow up within 24 hours.</div>
+        <button class="form-btn" id="req-btn" onclick="submitRequest()">Submit Request</button>
+        <div class="form-success" id="req-success">✅ Your request has been submitted. Our HR team will follow up within 24 hours.</div>
+        <div class="form-error-msg" id="req-error">❌ Something went wrong. Please try again or email faiz.ishak@info-solutions.org directly.</div>
       </div>
     </div>
 
-    <!-- ── MY PROFILE (CONSULTANT) ── -->
+    <!-- PROFILE (CONSULTANT) -->
     <div class="page" id="page-profile">
       <div class="page-header">
         <h2>My Profile</h2>
         <p>Your current profile as it appears to clients in the talent showcase.</p>
       </div>
-      <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;">
-        <div class="profile-card" style="flex:1; min-width:280px;">
+      <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;">
+        <div class="profile-card" style="flex:1;min-width:280px;">
           <div class="profile-avatar" id="profile-avatar"></div>
           <div class="profile-name" id="profile-name"></div>
           <div class="profile-title" id="profile-title"></div>
@@ -440,14 +335,14 @@
           <div class="profile-row"><span class="profile-key">Skills</span><span class="profile-val" id="profile-skills"></span></div>
           <div class="profile-row"><span class="profile-key">Availability</span><span class="profile-val" id="profile-avail"></span></div>
           <div class="profile-row"><span class="profile-key">Location</span><span class="profile-val" id="profile-location"></span></div>
-          <div class="profile-row"><span class="profile-key">Work Email</span><span class="profile-val" id="profile-email"></span></div>
+          <div class="profile-row"><span class="profile-key">Email</span><span class="profile-val" id="profile-email"></span></div>
           <hr class="profile-divider"/>
           <div class="profile-row"><span class="profile-key">H-1B Status</span><span class="profile-val" id="profile-h1b"></span></div>
           <div class="profile-row"><span class="profile-key">I-797 Expiry</span><span class="profile-val" id="profile-expiry"></span></div>
         </div>
-        <div class="form-card" style="flex:1; min-width:280px;">
+        <div class="form-card" style="flex:1;min-width:280px;">
           <div class="form-title">Update My Availability</div>
-          <div class="form-subtitle">Let HR and clients know when you are available for new engagements.</div>
+          <div class="form-subtitle">Let HR and clients know when you are available.</div>
           <div class="form-group">
             <label class="form-label">Availability Status</label>
             <select class="form-select" id="update-avail">
@@ -460,10 +355,11 @@
           </div>
           <div class="form-group">
             <label class="form-label">Notes for HR</label>
-            <textarea class="form-textarea" id="update-notes" placeholder="Any context about your availability, upcoming engagements, or preferences..."></textarea>
+            <textarea class="form-textarea" id="update-notes" placeholder="Any context about your availability..."></textarea>
           </div>
-          <button class="form-btn" onclick="updateAvailability()">Update Availability</button>
+          <button class="form-btn" id="avail-btn" onclick="updateAvailability()">Update Availability</button>
           <div class="form-success" id="avail-success">✅ Your availability has been updated. HR has been notified.</div>
+          <div class="form-error-msg" id="avail-error">❌ Update failed. Please try again.</div>
         </div>
       </div>
     </div>
@@ -471,7 +367,7 @@
   </div>
 </div>
 
-<!-- ── REQUEST MODAL ── -->
+<!-- REQUEST MODAL -->
 <div class="modal-overlay" id="request-modal">
   <div class="modal">
     <div class="modal-header">
@@ -494,85 +390,123 @@
       <label class="form-label">Additional Notes</label>
       <textarea class="form-textarea" id="modal-notes" placeholder="Any additional requirements..."></textarea>
     </div>
-    <button class="form-btn" onclick="submitModalRequest()" style="width:100%">Submit Request</button>
+    <button class="form-btn" id="modal-btn" onclick="submitModalRequest()" style="width:100%">Submit Request</button>
     <div class="form-success" id="modal-success">✅ Request submitted. Our HR team will follow up within 24 hours.</div>
+    <div class="form-error-msg" id="modal-error">❌ Submission failed. Please try again.</div>
   </div>
 </div>
 
-<script>
-// ══════════════════════════════════════
-// DATA
-// ══════════════════════════════════════
-const USERS = {
-  "admin@myceli.com":                { pass: "admin123",   role: "admin",      name: "Faiz Ishak" },
-  "faiz.ishak@info-solutions.org":   { pass: "admin123",   role: "admin",      name: "Faiz Ishak" },
-  "client@techsphere.com":           { pass: "client123",  role: "client",     name: "TechSphere Client" },
-  "consultant@info-solutions.org":   { pass: "consult123", role: "consultant", name: "Rahul Chavan" },
+<!-- FIREBASE SDKs -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, query, where, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// ── FIREBASE CONFIG ──────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyA4MT6ij7DdpmjeU0mUVQGZQAf1E6P2c28",
+  authDomain: "info-solutions-staffing-portal.firebaseapp.com",
+  projectId: "info-solutions-staffing-portal",
+  storageBucket: "info-solutions-staffing-portal.firebasestorage.app",
+  messagingSenderId: "364167036080",
+  appId: "1:364167036080:web:7ba66a107094ab87fdcf75",
+  measurementId: "G-4C00NCEPKJ"
 };
 
-const CONSULTANTS = [
-  { id: 1, name: "Achyuth Naidu Bellary",       email: "abellary@info-solutions.org",           title: "[Job Title — To Be Filled]",    skills: ["Oracle", "ERP", "SQL"],              avail: "Available Now",        location: "Remote",     h1b: "Active",            expiry: "09/30/2028", notes: "PERM for GC in progress" },
-  { id: 2, name: "Harikrishna Vunnam",          email: "harikrishna.vunnam@info-solutions.org", title: "[Job Title — To Be Filled]",    skills: ["Java", "Spring Boot", "AWS"],        avail: "Available in 2 weeks", location: "Remote",     h1b: "Active",            expiry: "01/31/2028", notes: "H-4 extension in progress for dependent" },
-  { id: 3, name: "Sai Teja Mamidiset",          email: "teja.sunny94@gmail.com",                title: "[Job Title — To Be Filled]",    skills: ["SAP", "ABAP", "Fiori"],             avail: "Available in 30 days", location: "Irvine CA",  h1b: "Active",            expiry: "10/20/2026", notes: "7th year extension starting June 5" },
-  { id: 4, name: "Shreyas Shirsekar",           email: "shirsekarshreyas09@gmail.com",          title: "[Job Title — To Be Filled]",    skills: ["Python", "Data", "ML"],             avail: "Available Now",        location: "Remote",     h1b: "Need to Confirm",   expiry: "TBD",        notes: "Awaiting response" },
-  { id: 5, name: "Fnu Nazeer A Sharjeel",       email: "itssharjeel@gmail.com",                 title: "[Job Title — To Be Filled]",    skills: ["React", "Node.js", "TypeScript"],   avail: "Available Now",        location: "Remote",     h1b: "Need to Confirm",   expiry: "TBD",        notes: "Awaiting response" },
-  { id: 6, name: "Manish Reddy Vundyala",       email: "mvundyala@gmail.com",                   title: "[Job Title — To Be Filled]",    skills: ["Salesforce", "CRM", "Apex"],        avail: "Available in 30 days", location: "Remote",     h1b: "Extension Pending", expiry: "05/24/2026", notes: "URGENT — auto extension rule active" },
-  { id: 7, name: "Aditya Pratap Singh Chauhan", email: "aditya@info-solutions.org",             title: "[Job Title — To Be Filled]",    skills: ["Project Mgmt", "Agile", "Scrum"],   avail: "Available in 2 weeks", location: "Nashville TN", h1b: "Extension Pending", expiry: "12/18/2026", notes: "H-1B, H-4, H-4 EAD filed. Receipt IOE9289293094" },
-];
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const REQUESTS = [
-  { date: "06/10/2026", client: "TechSphere", role: "Oracle Fusion Consultant", skills: "Oracle, ERP", consultant: "Rahul Chavan", status: "In Progress" },
-  { date: "06/14/2026", client: "TechSphere", role: "React Developer", skills: "React, TypeScript", consultant: "Pending Match", status: "New" },
-];
+// ── BACKEND URL ──────────────────────────────────────
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbyZ5R4tDnR--vIxkt9oqwXGWyE3nka1RO3j2RFATzgoPF8BPpDzJNDOi0_DTufRoC1X/exec";
 
+// ── STATE ────────────────────────────────────────────
 let currentUser = null;
+let currentRole = null;
+let currentUserName = null;
+let allConsultants = [];
 let selectedConsultant = null;
 
-// ══════════════════════════════════════
-// AUTH
-// ══════════════════════════════════════
-function doLogin() {
-  const email = document.getElementById("login-email").value.trim().toLowerCase();
+// ── AUTH STATE LISTENER ──────────────────────────────
+onAuthStateChanged(auth, async (user) => {
+  document.getElementById("loading-screen").style.display = "none";
+  if (user) {
+    currentUser = user;
+    await loadUserRole(user.email);
+    buildApp();
+  } else {
+    currentUser = null;
+    currentRole = null;
+    document.getElementById("login-page").style.display = "flex";
+    document.getElementById("app").style.display = "none";
+  }
+});
+
+// ── LOAD USER ROLE FROM FIRESTORE ────────────────────
+async function loadUserRole(email) {
+  try {
+    const q = query(collection(db, "users"), where("email", "==", email.toLowerCase()));
+    const snap = await getDocs(q);
+    if (!snap.empty) {
+      const data = snap.docs[0].data();
+      currentRole = data.role || "client";
+      currentUserName = data.name || email;
+    } else {
+      currentRole = "client";
+      currentUserName = email;
+    }
+  } catch (err) {
+    console.error("Error loading user role:", err);
+    currentRole = "client";
+    currentUserName = email;
+  }
+}
+
+// ── LOGIN ────────────────────────────────────────────
+window.doLogin = async function() {
+  const email = document.getElementById("login-email").value.trim();
   const pass = document.getElementById("login-pass").value;
+  const btn = document.getElementById("login-btn");
   const err = document.getElementById("login-error");
 
-  const user = USERS[email];
-  if (!user || user.pass !== pass) {
-    err.style.display = "block";
-    return;
-  }
+  if (!email || !pass) { err.textContent = "Please enter your email and password."; err.style.display = "block"; return; }
 
+  btn.textContent = "Signing in...";
+  btn.disabled = true;
   err.style.display = "none";
-  currentUser = { email, role: user.role, name: user.name };
-  buildApp();
-}
 
-function doLogout() {
-  currentUser = null;
-  document.getElementById("login-page").style.display = "flex";
-  document.getElementById("app").style.display = "none";
-  document.getElementById("login-email").value = "";
-  document.getElementById("login-pass").value = "";
-}
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch (e) {
+    err.textContent = "Invalid email or password. Please try again.";
+    err.style.display = "block";
+    btn.textContent = "Sign In";
+    btn.disabled = false;
+  }
+};
 
-// ══════════════════════════════════════
-// BUILD APP
-// ══════════════════════════════════════
+// ── LOGOUT ───────────────────────────────────────────
+window.doLogout = async function() {
+  await signOut(auth);
+};
+
+// ── BUILD APP ────────────────────────────────────────
 function buildApp() {
   document.getElementById("login-page").style.display = "none";
   document.getElementById("app").style.display = "block";
-  document.getElementById("user-display").textContent = currentUser.name;
-  document.getElementById("role-badge").textContent = currentUser.role;
-
+  document.getElementById("login-btn").textContent = "Sign In";
+  document.getElementById("login-btn").disabled = false;
+  document.getElementById("user-display").textContent = currentUserName;
+  document.getElementById("role-badge").textContent = currentRole;
   buildNav();
-  buildContent();
+  loadContent();
 }
 
+// ── NAVIGATION ───────────────────────────────────────
 function buildNav() {
   const nav = document.getElementById("nav-tabs");
   nav.innerHTML = "";
-
-  const tabs = getTabsForRole(currentUser.role);
+  const tabs = getTabsForRole(currentRole);
   tabs.forEach((tab, i) => {
     const btn = document.createElement("button");
     btn.className = "nav-tab" + (i === 0 ? " active" : "");
@@ -599,83 +533,107 @@ function getTabsForRole(role) {
   return [];
 }
 
-function buildContent() {
-  const tabs = getTabsForRole(currentUser.role);
-  if (tabs.length > 0) showPage(tabs[0].page);
-
-  buildAdminDashboard();
-  buildConsultantCards();
-  buildClientRequests();
-  buildProfile();
-}
-
-// ══════════════════════════════════════
-// PAGE NAVIGATION
-// ══════════════════════════════════════
-function showPage(pageId) {
+window.showPage = function(pageId) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.getElementById(pageId).classList.add("active");
   document.querySelectorAll(".nav-tab").forEach((btn, i) => {
-    const tabs = getTabsForRole(currentUser.role);
+    const tabs = getTabsForRole(currentRole);
     btn.classList.toggle("active", tabs[i] && tabs[i].page === pageId);
   });
+};
+
+// ── LOAD ALL CONTENT ─────────────────────────────────
+async function loadContent() {
+  const tabs = getTabsForRole(currentRole);
+  if (tabs.length > 0) showPage(tabs[0].page);
+  await loadConsultants();
+  if (currentRole === "admin") { buildAdminDashboard(); loadAdminRequests(); }
+  if (currentRole === "client") loadClientRequests();
+  if (currentRole === "consultant") buildProfile();
 }
 
-// ══════════════════════════════════════
-// ADMIN DASHBOARD
-// ══════════════════════════════════════
+// ── LOAD CONSULTANTS FROM FIRESTORE ─────────────────
+async function loadConsultants() {
+  try {
+    const snap = await getDocs(collection(db, "consultants"));
+    allConsultants = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    buildConsultantCards();
+  } catch (err) {
+    console.error("Error loading consultants:", err);
+    document.getElementById("consultant-cards").innerHTML = "<p style='color:var(--grey-mid);'>Unable to load consultants. Please refresh.</p>";
+  }
+}
+
+// ── ADMIN DASHBOARD ──────────────────────────────────
 function buildAdminDashboard() {
   const tbody = document.getElementById("admin-h1b-table");
   const alerts = document.getElementById("admin-alerts");
   const today = new Date();
-
   let alertHTML = "";
   let urgentCount = 0;
+  let activeCount = 0;
 
-  CONSULTANTS.forEach(c => {
-    const expiry = c.expiry !== "TBD" ? new Date(c.expiry) : null;
+  document.getElementById("stat-consultants").textContent = allConsultants.length;
+  tbody.innerHTML = "";
+
+  allConsultants.forEach(c => {
+    const expiry = c.expiry && c.expiry !== "TBD" ? new Date(c.expiry) : null;
     const daysLeft = expiry ? Math.floor((expiry - today) / (1000*60*60*24)) : null;
 
-    let statusBadge = "";
+    if (c.h1b === "Active") activeCount++;
+    if (c.h1b === "Extension Pending") urgentCount++;
+
+    let statusBadge = c.h1b === "Active" ? '<span class="status-badge active">Active</span>' :
+                      c.h1b === "Extension Pending" ? '<span class="status-badge pending">Extension Pending</span>' :
+                      '<span class="status-badge new">' + (c.h1b || "Unknown") + '</span>';
+
     let daysDisplay = "TBD";
-
-    if (c.h1b === "Active") statusBadge = '<span class="status-badge active">Active</span>';
-    else if (c.h1b === "Extension Pending") { statusBadge = '<span class="status-badge pending">Extension Pending</span>'; urgentCount++; }
-    else statusBadge = '<span class="status-badge new">' + c.h1b + '</span>';
-
     if (daysLeft !== null) {
       daysDisplay = daysLeft < 0 ? '<span style="color:var(--red);font-weight:700;">' + Math.abs(daysLeft) + ' overdue</span>' :
                    daysLeft <= 30 ? '<span style="color:var(--red);font-weight:700;">' + daysLeft + ' days</span>' :
                    daysLeft <= 90 ? '<span style="color:var(--orange);font-weight:700;">' + daysLeft + ' days</span>' :
                    '<span style="color:var(--green-mid);">' + daysLeft + ' days</span>';
+
+      if (daysLeft <= 0) alertHTML += '<div class="alert-banner red">🔴 URGENT: ' + c.name + " I-797 has expired (" + c.expiry + "). Contact attorney immediately.</div>";
+      else if (daysLeft <= 30) alertHTML += '<div class="alert-banner red">🔴 CRITICAL: ' + c.name + " expires in " + daysLeft + " days. File extension now.</div>";
     }
 
-    if (daysLeft !== null && daysLeft <= 0) {
-      alertHTML += '<div class="alert-banner red">🔴 URGENT: ' + c.name + "'s I-797 has expired (" + c.expiry + "). Contact attorney immediately.</div>";
-    } else if (daysLeft !== null && daysLeft <= 30) {
-      alertHTML += '<div class="alert-banner red">🔴 CRITICAL: ' + c.name + "'s I-797 expires in " + daysLeft + " days (" + c.expiry + "). File extension now.</div>";
-    }
-
-    tbody.innerHTML += "<tr><td><strong>" + c.name + "</strong></td><td>" + statusBadge + "</td><td>" + c.expiry + "</td><td>" + daysDisplay + "</td><td>Manju Patil</td><td style='font-size:12px;color:var(--grey-mid);'>" + c.notes + "</td></tr>";
+    tbody.innerHTML += "<tr><td><strong>" + (c.name||"") + "</strong></td><td>" + statusBadge + "</td><td>" + (c.expiry||"TBD") + "</td><td>" + daysDisplay + "</td><td>" + (c.attorney||"Manju Patil") + "</td><td style='font-size:12px;color:var(--grey-mid);'>" + (c.notes||"") + "</td></tr>";
   });
 
   alerts.innerHTML = alertHTML;
+  document.getElementById("stat-active").textContent = activeCount;
   document.getElementById("stat-urgent").textContent = urgentCount;
-
-  const reqTbody = document.getElementById("admin-requests-table");
-  REQUESTS.forEach(r => {
-    let badge = r.status === "New" ? "new" : r.status === "In Progress" ? "pending" : "active";
-    reqTbody.innerHTML += "<tr><td>" + r.date + "</td><td>" + r.client + "</td><td>" + r.role + "</td><td>" + r.skills + "</td><td><span class='status-badge " + badge + "'>" + r.status + "</span></td></tr>";
-  });
 }
 
-// ══════════════════════════════════════
-// CONSULTANT CARDS
-// ══════════════════════════════════════
+async function loadAdminRequests() {
+  try {
+    const snap = await getDocs(collection(db, "staffing_requests"));
+    const tbody = document.getElementById("admin-requests-table");
+    tbody.innerHTML = "";
+    document.getElementById("stat-requests").textContent = snap.docs.length;
+
+    if (snap.empty) {
+      tbody.innerHTML = "<tr><td colspan='6' style='text-align:center;color:var(--grey-mid);padding:24px;'>No requests yet.</td></tr>";
+      return;
+    }
+
+    snap.docs.forEach(d => {
+      const r = d.data();
+      let badge = r.status === "New" ? "new" : r.status === "In Progress" ? "pending" : "active";
+      const date = r.timestamp ? new Date(r.timestamp.toDate()).toLocaleDateString("en-US") : (r.date || "");
+      tbody.innerHTML += "<tr><td>" + date + "</td><td>" + (r.clientEmail||"") + "</td><td>" + (r.roleNeeded||"") + "</td><td>" + (r.skillsRequired||"") + "</td><td>" + (r.consultantRequested||"Pending") + "</td><td><span class='status-badge " + badge + "'>" + (r.status||"New") + "</span></td></tr>";
+    });
+  } catch (err) {
+    console.error("Error loading requests:", err);
+  }
+}
+
+// ── CONSULTANT CARDS ─────────────────────────────────
 function buildConsultantCards(list) {
   const container = document.getElementById("consultant-cards");
   container.innerHTML = "";
-  const data = list || CONSULTANTS.filter(c => c.avail !== "Not Available" && c.avail !== "Placed");
+  const data = (list || allConsultants).filter(c => c.status === "Active" && c.availability !== "Not Available" && c.availability !== "Placed");
 
   if (data.length === 0) {
     container.innerHTML = "<p style='color:var(--grey-mid);font-size:14px;'>No consultants match your search.</p>";
@@ -683,109 +641,215 @@ function buildConsultantCards(list) {
   }
 
   data.forEach(c => {
-    const initials = c.name.split(" ").map(n => n[0]).join("").substring(0, 2).toUpperCase();
-    const availClass = c.avail === "Available Now" ? "available" : c.avail.includes("2 weeks") || c.avail.includes("30") ? "soon" : "unavailable";
-    const skillTags = c.skills.map(s => '<span class="skill-tag">' + s + '</span>').join("");
+    const initials = (c.name || "??").split(" ").map(n => n[0]).join("").substring(0, 2).toUpperCase();
+    const skills = Array.isArray(c.skills) ? c.skills : (c.skills || "").split(",").map(s => s.trim()).filter(Boolean);
+    const availClass = c.availability === "Available Now" ? "available" : (c.availability || "").includes("weeks") || (c.availability || "").includes("30") ? "soon" : "unavailable";
+    const skillTags = skills.map(s => '<span class="skill-tag">' + s + '</span>').join("");
 
     container.innerHTML += `
       <div class="consultant-card">
         <div class="card-avatar">${initials}</div>
-        <div class="card-name">${c.name}</div>
-        <div class="card-title">${c.title}</div>
+        <div class="card-name">${c.name || ""}</div>
+        <div class="card-title">${c.title || "Consultant"}</div>
         <div class="card-skills">${skillTags}</div>
-        <div><span class="avail-badge ${availClass}">${c.avail}</span></div>
-        <button class="request-btn" onclick="openRequestModal(${c.id})">Request This Consultant</button>
+        <div><span class="avail-badge ${availClass}">${c.availability || "Available Now"}</span></div>
+        <button class="request-btn" onclick="openRequestModal('${c.id}')">Request This Consultant</button>
       </div>`;
   });
 }
 
-function filterConsultants() {
+window.filterConsultants = function() {
   const search = document.getElementById("talent-search").value.toLowerCase();
   const avail = document.getElementById("avail-filter").value;
-
-  const filtered = CONSULTANTS.filter(c => {
-    if (c.avail === "Not Available" || c.avail === "Placed") return false;
-    const matchSearch = !search ||
-      c.name.toLowerCase().includes(search) ||
-      c.title.toLowerCase().includes(search) ||
-      c.skills.some(s => s.toLowerCase().includes(search));
-    const matchAvail = !avail || c.avail === avail;
+  const filtered = allConsultants.filter(c => {
+    if (c.status !== "Active") return false;
+    if (c.availability === "Not Available" || c.availability === "Placed") return false;
+    const skills = Array.isArray(c.skills) ? c.skills : (c.skills || "").split(",").map(s => s.trim());
+    const matchSearch = !search || (c.name||"").toLowerCase().includes(search) || (c.title||"").toLowerCase().includes(search) || skills.some(s => s.toLowerCase().includes(search));
+    const matchAvail = !avail || c.availability === avail;
     return matchSearch && matchAvail;
   });
-
   buildConsultantCards(filtered);
+};
+
+// ── CLIENT REQUESTS ──────────────────────────────────
+async function loadClientRequests() {
+  try {
+    const q = query(collection(db, "staffing_requests"), where("clientEmail", "==", currentUser.email));
+    const snap = await getDocs(q);
+    const tbody = document.getElementById("client-requests-table");
+    tbody.innerHTML = "";
+
+    if (snap.empty) {
+      tbody.innerHTML = "<tr><td colspan='5' style='text-align:center;color:var(--grey-mid);padding:24px;'>No requests submitted yet.</td></tr>";
+      return;
+    }
+
+    snap.docs.forEach(d => {
+      const r = d.data();
+      let badge = r.status === "New" ? "new" : r.status === "In Progress" ? "pending" : "active";
+      const date = r.timestamp ? new Date(r.timestamp.toDate()).toLocaleDateString("en-US") : (r.date || "");
+      tbody.innerHTML += "<tr><td>" + date + "</td><td>" + (r.roleNeeded||"") + "</td><td>" + (r.skillsRequired||"") + "</td><td>" + (r.consultantRequested||"Pending match") + "</td><td><span class='status-badge " + badge + "'>" + (r.status||"New") + "</span></td></tr>";
+    });
+  } catch (err) {
+    console.error("Error loading client requests:", err);
+  }
 }
 
-// ══════════════════════════════════════
-// CLIENT REQUESTS
-// ══════════════════════════════════════
-function buildClientRequests() {
-  const tbody = document.getElementById("client-requests-table");
-  REQUESTS.forEach(r => {
-    let badge = r.status === "New" ? "new" : r.status === "In Progress" ? "pending" : "active";
-    tbody.innerHTML += "<tr><td>" + r.date + "</td><td>" + r.role + "</td><td>" + r.skills + "</td><td>" + r.consultant + "</td><td><span class='status-badge " + badge + "'>" + r.status + "</span></td></tr>";
-  });
-}
-
-function submitRequest() {
-  const role = document.getElementById("req-role").value;
+// ── SUBMIT REQUEST ───────────────────────────────────
+window.submitRequest = async function() {
+  const role = document.getElementById("req-role").value.trim();
   if (!role) { alert("Please enter the role needed."); return; }
-  document.getElementById("req-success").style.display = "block";
-  document.getElementById("req-role").value = "";
-  document.getElementById("req-skills").value = "";
-  document.getElementById("req-notes").value = "";
-}
 
-// ══════════════════════════════════════
-// PROFILE
-// ══════════════════════════════════════
+  const btn = document.getElementById("req-btn");
+  btn.textContent = "Submitting...";
+  btn.disabled = true;
+  document.getElementById("req-success").style.display = "none";
+  document.getElementById("req-error").style.display = "none";
+
+  try {
+    await addDoc(collection(db, "staffing_requests"), {
+      clientEmail: currentUser.email,
+      clientName: currentUserName,
+      roleNeeded: role,
+      skillsRequired: document.getElementById("req-skills").value,
+      desiredStart: document.getElementById("req-start").value,
+      duration: document.getElementById("req-duration").value,
+      workLocation: document.getElementById("req-location").value,
+      notes: document.getElementById("req-notes").value,
+      consultantRequested: "",
+      status: "New",
+      timestamp: serverTimestamp()
+    });
+
+    // Also notify via Apps Script
+    fetch(BACKEND_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "submitRequest", clientEmail: currentUser.email, clientCompany: currentUserName, roleNeeded: role, skillsRequired: document.getElementById("req-skills").value })
+    }).catch(() => {});
+
+    document.getElementById("req-success").style.display = "block";
+    document.getElementById("req-role").value = "";
+    document.getElementById("req-skills").value = "";
+    document.getElementById("req-notes").value = "";
+    document.getElementById("req-start").value = "";
+  } catch (err) {
+    console.error("Submit error:", err);
+    document.getElementById("req-error").style.display = "block";
+  }
+
+  btn.textContent = "Submit Request";
+  btn.disabled = false;
+};
+
+// ── CONSULTANT PROFILE ───────────────────────────────
 function buildProfile() {
-  const consultant = CONSULTANTS.find(c => c.name === currentUser.name) || CONSULTANTS[4];
-  const initials = consultant.name.split(" ").map(n => n[0]).join("").substring(0, 2);
+  const c = allConsultants.find(x => x.email && x.email.toLowerCase() === currentUser.email.toLowerCase()) || allConsultants[0];
+  if (!c) { document.getElementById("page-profile").innerHTML = "<p style='color:var(--grey-mid);padding:24px;'>Profile not found. Contact HR to set up your profile.</p>"; return; }
+
+  const initials = (c.name || "??").split(" ").map(n => n[0]).join("").substring(0, 2);
   document.getElementById("profile-avatar").textContent = initials;
-  document.getElementById("profile-name").textContent = consultant.name;
-  document.getElementById("profile-title").textContent = consultant.title;
-  document.getElementById("profile-skills").textContent = consultant.skills.join(", ");
-  document.getElementById("profile-avail").textContent = consultant.avail;
-  document.getElementById("profile-location").textContent = consultant.location;
-  document.getElementById("profile-email").textContent = consultant.email;
-  document.getElementById("profile-h1b").textContent = consultant.h1b;
-  document.getElementById("profile-expiry").textContent = consultant.expiry;
-  document.getElementById("update-avail").value = consultant.avail;
+  document.getElementById("profile-name").textContent = c.name || "";
+  document.getElementById("profile-title").textContent = c.title || "Consultant";
+  const skills = Array.isArray(c.skills) ? c.skills.join(", ") : (c.skills || "");
+  document.getElementById("profile-skills").textContent = skills;
+  document.getElementById("profile-avail").textContent = c.availability || "";
+  document.getElementById("profile-location").textContent = c.location || "";
+  document.getElementById("profile-email").textContent = c.email || "";
+  document.getElementById("profile-h1b").textContent = c.h1b || "";
+  document.getElementById("profile-expiry").textContent = c.expiry || "TBD";
+  document.getElementById("update-avail").value = c.availability || "Available Now";
 }
 
-function updateAvailability() {
-  document.getElementById("avail-success").style.display = "block";
-  setTimeout(() => { document.getElementById("avail-success").style.display = "none"; }, 4000);
-}
+window.updateAvailability = async function() {
+  const availability = document.getElementById("update-avail").value;
+  const notes = document.getElementById("update-notes").value;
+  const btn = document.getElementById("avail-btn");
+  btn.textContent = "Updating...";
+  btn.disabled = true;
+  document.getElementById("avail-success").style.display = "none";
+  document.getElementById("avail-error").style.display = "none";
 
-// ══════════════════════════════════════
-// REQUEST MODAL
-// ══════════════════════════════════════
-function openRequestModal(id) {
-  selectedConsultant = CONSULTANTS.find(c => c.id === id);
-  document.getElementById("modal-consultant-name").textContent = selectedConsultant.name;
-  document.getElementById("modal-consultant-title").textContent = selectedConsultant.title;
+  try {
+    const c = allConsultants.find(x => x.email && x.email.toLowerCase() === currentUser.email.toLowerCase());
+    if (c) {
+      await updateDoc(doc(db, "consultants", c.id), { availability });
+      document.getElementById("profile-avail").textContent = availability;
+
+      fetch(BACKEND_URL, {
+        method: "POST", mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "updateAvailability", email: currentUser.email, availability, notes })
+      }).catch(() => {});
+    }
+    document.getElementById("avail-success").style.display = "block";
+    setTimeout(() => { document.getElementById("avail-success").style.display = "none"; }, 4000);
+  } catch (err) {
+    console.error("Availability update error:", err);
+    document.getElementById("avail-error").style.display = "block";
+  }
+
+  btn.textContent = "Update Availability";
+  btn.disabled = false;
+};
+
+// ── REQUEST MODAL ────────────────────────────────────
+window.openRequestModal = function(id) {
+  selectedConsultant = allConsultants.find(c => c.id === id);
+  if (!selectedConsultant) return;
+  document.getElementById("modal-consultant-name").textContent = selectedConsultant.name || "";
+  document.getElementById("modal-consultant-title").textContent = selectedConsultant.title || "Consultant";
   document.getElementById("modal-success").style.display = "none";
+  document.getElementById("modal-error").style.display = "none";
   document.getElementById("modal-role").value = "";
   document.getElementById("modal-notes").value = "";
   document.getElementById("request-modal").classList.add("open");
-}
+};
 
-function closeModal() {
+window.closeModal = function() {
   document.getElementById("request-modal").classList.remove("open");
-}
+};
 
-function submitModalRequest() {
-  const role = document.getElementById("modal-role").value;
+window.submitModalRequest = async function() {
+  const role = document.getElementById("modal-role").value.trim();
   if (!role) { alert("Please describe the role or project."); return; }
-  document.getElementById("modal-success").style.display = "block";
-  setTimeout(closeModal, 2500);
-}
+
+  const btn = document.getElementById("modal-btn");
+  btn.textContent = "Submitting...";
+  btn.disabled = true;
+  document.getElementById("modal-success").style.display = "none";
+  document.getElementById("modal-error").style.display = "none";
+
+  try {
+    const skills = selectedConsultant && Array.isArray(selectedConsultant.skills) ? selectedConsultant.skills.join(", ") : (selectedConsultant?.skills || "");
+    await addDoc(collection(db, "staffing_requests"), {
+      clientEmail: currentUser.email,
+      clientName: currentUserName,
+      roleNeeded: role,
+      skillsRequired: skills,
+      desiredStart: document.getElementById("modal-start").value,
+      notes: document.getElementById("modal-notes").value,
+      consultantRequested: selectedConsultant?.name || "",
+      status: "New",
+      timestamp: serverTimestamp()
+    });
+
+    document.getElementById("modal-success").style.display = "block";
+    setTimeout(closeModal, 2500);
+  } catch (err) {
+    console.error("Modal submit error:", err);
+    document.getElementById("modal-error").style.display = "block";
+  }
+
+  btn.textContent = "Submit Request";
+  btn.disabled = false;
+};
 
 document.getElementById("request-modal").addEventListener("click", function(e) {
   if (e.target === this) closeModal();
 });
+
 </script>
 </body>
 </html>
