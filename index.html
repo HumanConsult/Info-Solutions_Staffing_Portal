@@ -430,7 +430,7 @@ let selectedConsultant = null;
 // ── AUTH STATE LISTENER ──────────────────────────────
 onAuthStateChanged(auth, async (user) => {
   document.getElementById("loading-screen").style.display = "none";
-  if (user && user.emailVerified) {
+  if (user) {
     currentUser = user;
     await loadUserRole(user.email);
     buildApp();
@@ -439,10 +439,6 @@ onAuthStateChanged(auth, async (user) => {
     currentRole = null;
     document.getElementById("login-page").style.display = "flex";
     document.getElementById("app").style.display = "none";
-    if (user && !user.emailVerified) {
-      document.getElementById("login-error").textContent = "Please verify your email before signing in. Check your inbox for a verification link.";
-      document.getElementById("login-error").style.display = "block";
-    }
   }
 });
 
@@ -480,16 +476,7 @@ window.doLogin = async function() {
   err.style.display = "none";
 
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, pass);
-    if (!userCredential.user.emailVerified) {
-      await userCredential.user.sendEmailVerification();
-      err.textContent = "A verification email has been sent to " + email + ". Please verify your email before signing in.";
-      err.style.display = "block";
-      await signOut(auth);
-      btn.textContent = "Sign In";
-      btn.disabled = false;
-      return;
-    }
+    await signInWithEmailAndPassword(auth, email, pass);
   } catch (e) {
     err.textContent = "Invalid email or password. Please try again.";
     err.style.display = "block";
