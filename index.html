@@ -598,7 +598,7 @@ function buildAdminDashboard() {
       else if (daysLeft <= 30) alertHTML += '<div class="alert-banner red">🔴 CRITICAL: ' + c.name + " expires in " + daysLeft + " days. File extension now.</div>";
     }
 
-    tbody.innerHTML += "<tr><td><strong>" + (c.name||"") + "</strong></td><td>" + statusBadge + "</td><td>" + (c.expiry||"TBD") + "</td><td>" + daysDisplay + "</td><td>" + (c.attorney||"Manju Patil") + "</td><td style='font-size:12px;color:var(--grey-mid);'>" + (c.notes||"") + "</td></tr>";
+    tbody.innerHTML += "<tr><td><strong>" + (c.name||"") + "</strong></td><td>" + statusBadge + "</td><td>" + (c.expiry||"TBD") + "</td><td>" + daysDisplay + "</td><td>" + (c.attorney||"") + "</td><td style='font-size:12px;color:var(--grey-mid);'>" + (c.notes||"") + "</td></tr>";
   });
 
   alerts.innerHTML = alertHTML;
