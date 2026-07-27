@@ -400,7 +400,7 @@
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, query, where, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // ── FIREBASE CONFIG ──────────────────────────────────
 const firebaseConfig = {
@@ -624,21 +624,17 @@ async function loadAdminRequests() {
       let badge = r.status === "New" ? "new" : r.status === "In Progress" ? "pending" : r.status === "Filled" ? "active" : "urgent";
       const date = r.timestamp ? new Date(r.timestamp.toDate()).toLocaleDateString("en-US") : (r.date || "");
 
-      const sel1 = r.status === "New" ? " selected" : "";
-      const sel2 = r.status === "In Progress" ? " selected" : "";
-      const sel3 = r.status === "Filled" ? " selected" : "";
-      const sel4 = r.status === "Cancelled" ? " selected" : "";
+      const statusSelect = `
+        <select onchange="updateRequestStatus('${docId}', this.value)" style="padding:4px 8px;border-radius:4px;border:1px solid #DDD;font-size:12px;cursor:pointer;">
+          <option value="New" ${r.status === "New" ? "selected" : ""}>New</option>
+          <option value="In Progress" ${r.status === "In Progress" ? "selected" : ""}>In Progress</option>
+          <option value="Filled" ${r.status === "Filled" ? "selected" : ""}>Filled</option>
+          <option value="Cancelled" ${r.status === "Cancelled" ? "selected" : ""}>Cancelled</option>
+        </select>`;
 
-      const statusSelect = "<select onchange=\"updateRequestStatus('" + docId + "', this.value)\" style=\"padding:4px 8px;border-radius:4px;border:1px solid #DDD;font-size:12px;cursor:pointer;\">" +
-        "<option value=\"New\"" + sel1 + ">New</option>" +
-        "<option value=\"In Progress\"" + sel2 + ">In Progress</option>" +
-        "<option value=\"Filled\"" + sel3 + ">Filled</option>" +
-        "<option value=\"Cancelled\"" + sel4 + ">Cancelled</option>" +
-        "</select>";
+      const deleteBtn = `<button onclick="deleteRequest('${docId}')" style="margin-left:8px;padding:4px 8px;background:var(--red);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;">Delete</button>`;
 
-      const deleteBtn = "<button onclick=\"deleteRequest('" + docId + "')\" style=\"margin-left:8px;padding:4px 8px;background:var(--red);color:white;border:none;border-radius:4px;font-size:11px;cursor:pointer;\">Delete</button>";
-
-      tbody.innerHTML += "<tr id=\"req-" + docId + "\"><td>" + date + "</td><td style=\"font-size:12px;\">" + (r.clientEmail||"") + "</td><td>" + (r.roleNeeded||"") + "</td><td style=\"font-size:12px;\">" + (r.skillsRequired||"") + "</td><td>" + (r.consultantRequested||"Pending") + "</td><td><span class=\"status-badge " + badge + "\">" + (r.status||"New") + "</span></td><td>" + statusSelect + deleteBtn + "</td></tr>";
+      tbody.innerHTML += "<tr id='req-" + docId + "'><td>" + date + "</td><td style='font-size:12px;'>" + (r.clientEmail||"") + "</td><td>" + (r.roleNeeded||"") + "</td><td style='font-size:12px;'>" + (r.skillsRequired||"") + "</td><td>" + (r.consultantRequested||"Pending") + "</td><td><span class='status-badge " + badge + "'>" + (r.status||"New") + "</span></td><td>" + statusSelect + deleteBtn + "</td></tr>";
     });
   } catch (err) {
     console.error("Error loading requests:", err);
@@ -658,6 +654,7 @@ window.updateRequestStatus = async function(docId, newStatus) {
 window.deleteRequest = async function(docId) {
   if (!confirm("Are you sure you want to delete this request? This cannot be undone.")) return;
   try {
+    const { deleteDoc } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
     await deleteDoc(doc(db, "staffing_requests", docId));
     await loadAdminRequests();
   } catch (err) {
