@@ -373,8 +373,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const BACKEND_URL = "https://script.google.com/macros/s/AKfycbyZ5R4tDnR--vIxkt9oqwXGWyE3nka1RO3j2RFATzgoPF8BPpDzJNDOi0_DTufRoC1X/exec";
-
 let currentUser = null;
 let currentRole = null;
 let currentUserName = null;
@@ -650,7 +648,6 @@ window.submitRequest = async function() {
       status: "New",
       timestamp: serverTimestamp()
     });
-    fetch(BACKEND_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "submitRequest", clientEmail: currentUser.email, clientCompany: currentUserName, roleNeeded: role }) }).catch(function() {});
     document.getElementById("req-success").style.display = "block";
     document.getElementById("req-role").value = "";
     document.getElementById("req-skills").value = "";
@@ -691,8 +688,6 @@ window.updateAvailability = async function() {
     if (c) {
       await updateDoc(doc(db, "consultants", c.id), { availability: availability });
       document.getElementById("profile-avail").textContent = availability;
-      fetch(BACKEND_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "updateAvailability", email: currentUser.email, availability: availability, notes: notes }) }).catch(function() {});
-    }
     document.getElementById("avail-success").style.display = "block";
     setTimeout(function() { document.getElementById("avail-success").style.display = "none"; }, 4000);
   } catch (err) {
