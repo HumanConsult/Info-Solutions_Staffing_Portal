@@ -707,6 +707,7 @@ async function loadEngagements() {
 }
 
 
+window.submitRequest = async function() {
   var role = document.getElementById("req-role").value.trim();
   if (!role) { alert("Please enter the role needed."); return; }
   var btn = document.getElementById("req-btn");
