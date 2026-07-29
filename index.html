@@ -217,6 +217,40 @@
       <div class="cards-grid" id="consultant-cards"><p style="color:var(--grey-mid);">Loading consultants...</p></div>
     </div>
 
+    <!-- MY ENGAGEMENTS CLIENT -->
+    <div class="page" id="page-engagements">
+      <div class="page-header">
+        <h2>My Engagements</h2>
+        <p>View your active consultant placements and open staffing requests.</p>
+      </div>
+
+      <!-- Active Engagements Section -->
+      <div class="table-card" style="margin-bottom:24px;">
+        <div class="table-card-header">
+          <h3>Active Placements</h3>
+        </div>
+        <table>
+          <thead><tr><th>Consultant</th><th>Role</th><th>Start Date</th><th>End Date</th><th>Status</th><th>Notes</th></tr></thead>
+          <tbody id="engagements-table"><tr><td colspan="6" style="text-align:center;color:var(--grey-mid);padding:24px;">Loading...</td></tr></tbody>
+        </table>
+      </div>
+
+      <!-- Open Requests Section -->
+      <div class="table-card">
+        <div class="table-card-header">
+          <h3>Open Staffing Requests</h3>
+        </div>
+        <table>
+          <thead><tr><th>Date</th><th>Role Needed</th><th>Skills</th><th>Status</th></tr></thead>
+          <tbody id="engagements-requests-table"><tr><td colspan="4" style="text-align:center;color:var(--grey-mid);padding:24px;">Loading...</td></tr></tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:16px;">
+        <button class="form-btn" onclick="showPage('page-new-request')">+ Submit New Request</button>
+      </div>
+    </div>
+
     <!-- MY REQUESTS CLIENT -->
     <div class="page" id="page-requests">
       <div class="page-header">
@@ -471,6 +505,7 @@ function getTabsForRole(role) {
   ];
   if (role === "client") return [
     { label: "Talent Showcase", page: "page-talent" },
+    { label: "My Engagements", page: "page-engagements" },
     { label: "My Requests", page: "page-requests" },
     { label: "Submit Request", page: "page-new-request" }
   ];
@@ -494,7 +529,7 @@ async function loadContent() {
   if (tabs.length > 0) showPage(tabs[0].page);
   await loadConsultants();
   if (currentRole === "admin") { buildAdminDashboard(); loadAdminRequests(); }
-  if (currentRole === "client") loadClientRequests();
+  if (currentRole === "client") { loadClientRequests(); loadEngagements(); }
   if (currentRole === "consultant") buildProfile();
 }
 
@@ -627,7 +662,51 @@ async function loadClientRequests() {
   }
 }
 
-window.submitRequest = async function() {
+async function loadEngagements() {
+  try {
+    // Load active engagements
+    var q = query(collection(db, "engagements"), where("clientEmail", "==", currentUser.email));
+    var snap = await getDocs(q);
+    var tbody = document.getElementById("engagements-table");
+    tbody.innerHTML = "";
+
+    if (snap.empty) {
+      tbody.innerHTML = "<tr><td colspan='6' style='text-align:center;color:var(--grey-mid);padding:24px;'>No active placements at this time. Submit a staffing request below to get started.</td></tr>";
+    } else {
+      snap.docs.forEach(function(d) {
+        var e = d.data();
+        var badge = e.status === "Active" ? "active" : e.status === "Ending Soon" ? "pending" : "urgent";
+        tbody.innerHTML += "<tr><td><strong>" + (e.consultantName || "Pending Assignment") + "</strong></td><td>" + (e.role || "") + "</td><td>" + (e.startDate || "") + "</td><td>" + (e.endDate || "TBD") + "</td><td><span class='status-badge " + badge + "'>" + (e.status || "Active") + "</span></td><td style='font-size:12px;color:var(--grey-mid);'>" + (e.notes || "") + "</td></tr>";
+      });
+    }
+
+    // Load open requests
+    var q2 = query(collection(db, "staffing_requests"), where("clientEmail", "==", currentUser.email));
+    var snap2 = await getDocs(q2);
+    var tbody2 = document.getElementById("engagements-requests-table");
+    tbody2.innerHTML = "";
+
+    var openRequests = snap2.docs.filter(function(d) {
+      var status = d.data().status;
+      return status === "New" || status === "In Progress";
+    });
+
+    if (openRequests.length === 0) {
+      tbody2.innerHTML = "<tr><td colspan='4' style='text-align:center;color:var(--grey-mid);padding:24px;'>No open requests. Submit a new request to find your next consultant.</td></tr>";
+    } else {
+      openRequests.forEach(function(d) {
+        var r = d.data();
+        var badge = r.status === "New" ? "new" : "pending";
+        var date = r.timestamp ? new Date(r.timestamp.toDate()).toLocaleDateString("en-US") : (r.date || "");
+        tbody2.innerHTML += "<tr><td>" + date + "</td><td>" + (r.roleNeeded || "") + "</td><td>" + (r.skillsRequired || "") + "</td><td><span class='status-badge " + badge + "'>" + (r.status || "New") + "</span></td></tr>";
+      });
+    }
+  } catch (err) {
+    console.error("Error loading engagements:", err);
+  }
+}
+
+
   var role = document.getElementById("req-role").value.trim();
   if (!role) { alert("Please enter the role needed."); return; }
   var btn = document.getElementById("req-btn");
