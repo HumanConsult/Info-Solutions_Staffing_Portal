@@ -373,6 +373,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+
 let currentUser = null;
 let currentRole = null;
 let currentUserName = null;
@@ -688,6 +689,7 @@ window.updateAvailability = async function() {
     if (c) {
       await updateDoc(doc(db, "consultants", c.id), { availability: availability });
       document.getElementById("profile-avail").textContent = availability;
+    }
     document.getElementById("avail-success").style.display = "block";
     setTimeout(function() { document.getElementById("avail-success").style.display = "none"; }, 4000);
   } catch (err) {
